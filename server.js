@@ -8,13 +8,7 @@ const workoutRoutes = require("./routes/workoutRoutes");
 const app = express();
 
 // Enable CORS for your frontend domain
-app.use(
-  cors({
-    origin: ["https://workout-buddy-ledr76rj0-m0hammedks-projects.vercel.app"], // Replace with your actual frontend URL
-    methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed methods
-    credentials: true, // Enable cookies if needed
-  })
-);
+app.use(cors());
 
 // Middleware for logging requests
 app.use((req, res, next) => {
