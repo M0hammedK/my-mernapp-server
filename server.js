@@ -2,14 +2,16 @@ require("dotenv").config();
 
 const express = require("express");
 const mongoose = require("mongoose");
-const cors = require("cors"); // Import cors
 const workoutRoutes = require("./routes/workoutRoutes");
 
 const app = express();
 
+<<<<<<< HEAD
 // Enable CORS for your frontend domain
 app.use(cors());
 
+=======
+>>>>>>> 5915d032fa62b6e543c0d1711633aa0c90b8a648
 // Middleware for logging requests
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.path}`);
