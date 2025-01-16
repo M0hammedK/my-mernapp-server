@@ -2,10 +2,19 @@ require("dotenv").config();
 
 const express = require("express");
 const mongoose = require("mongoose");
-
+const cors = require("cors"); // Import cors
 const workoutRoutes = require("./routes/workoutRoutes");
 
 const app = express();
+
+// Enable CORS for your frontend domain
+app.use(
+  cors({
+    origin: ["https://workout-buddy-ledr76rj0-m0hammedks-projects.vercel.app"], // Replace with your actual frontend URL
+    methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed methods
+    credentials: true, // Enable cookies if needed
+  })
+);
 
 // Middleware for logging requests
 app.use((req, res, next) => {
@@ -23,17 +32,16 @@ app.use("/api/workouts", workoutRoutes);
 mongoose
   .connect(process.env.MONG_URL, {
     useNewUrlParser: true,
-    useUnifiedTopology: true, // Ensures compatibility with the MongoDB driver
+    useUnifiedTopology: true,
   })
   .then(() => {
     console.log("Connected to MongoDB");
-    // Start the server only after a successful database connection
-    const PORT = process.env.PORT || 4000; // Default to 4000 for local testing
+    const PORT = process.env.PORT || 4000;
     app.listen(PORT, () => {
       console.log(`Server is listening on port ${PORT}`);
     });
   })
   .catch((err) => {
     console.error("Failed to connect to MongoDB:", err.message);
-    process.exit(1); // Exit the application on database connection failure
+    process.exit(1);
   });
